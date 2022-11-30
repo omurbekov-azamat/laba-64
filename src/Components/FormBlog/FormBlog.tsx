@@ -11,7 +11,7 @@ const FormBlog: React.FC<Props> = ({button}) => {
     title: '',
     text: '',
     date: '',
-    id: Math.random().toString(35),
+    id: ''
   });
   const onBlogChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {name, value} = e.target;
@@ -27,7 +27,7 @@ const FormBlog: React.FC<Props> = ({button}) => {
         title: '',
         text: '',
         date: '',
-        id: Math.random().toString(35),
+        id: '',
       });
     }
   };
