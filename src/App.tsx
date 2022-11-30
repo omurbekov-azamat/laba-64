@@ -12,8 +12,10 @@ function App() {
       <header>
         <NavBar/>
       </header>
-      <div>
         <Routes>
+          <Route path = '/' element={(
+            <Home/>
+          )}/>
           <Route path='/home' element={(
             <Home/>
           )}/>
@@ -30,8 +32,6 @@ function App() {
             <h1>Not found!</h1>
           )}/>
         </Routes>
-      </div>
-
     </div>
 
   );

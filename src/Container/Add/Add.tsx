@@ -1,10 +1,11 @@
 import React from 'react';
+import FormBlog from "../../Components/FormBlog/FormBlog";
 
 const Add = () => {
   return (
-    <div className='container'>
-      Add
-    </div>
+    <>
+      <FormBlog button='Send'/>
+    </>
   );
 };
 
