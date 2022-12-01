@@ -1,49 +1,44 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import axiosApi from "../../axiosApi";
+import {useLocation} from "react-router-dom";
 import Blogs from "../../Components/Blog/Blogs";
-import {GotBlog} from "../../types";
+import Spinner from "../../Components/Spinner/Spinner";
+import {GotBlog, GotBlogList} from "../../types";
 
 const Home = () => {
-  const [blog, setBlog] = useState<GotBlog[]>([]);
+  const [blogs, setBlogs] = useState<GotBlog[]>([]);
+  const [loading, setLoading] = useState(false);
+  const location = useLocation();
 
   const fetchBlog = useCallback(async () => {
-    const arrayBlog: GotBlog[] = [];
-    const blogsResponse = await axiosApi.get<GotBlog[]>('/blog.json');
-
-    for (let key in blogsResponse.data) {
-      const test = {
-        id: key,
-        title: blogsResponse.data[key].title,
-        text: blogsResponse.data[key].text,
-        date: blogsResponse.data[key].date
+    try {
+      setLoading(true)
+      const blogsResponse = await axiosApi.get<GotBlogList>('/blog.json');
+      if (blogsResponse.data) {
+        const blogs = Object.keys(blogsResponse.data).map(key => {
+          const blog = blogsResponse.data[key];
+          blog.id = key;
+          return blog
+        });
+        setBlogs(blogs.reverse());
       }
-      arrayBlog.push(test);
+    } finally {
+      setLoading(false)
     }
-    setBlog(arrayBlog.reverse());
   }, []);
 
   useEffect(() => {
-    fetchBlog().catch(console.error);
-  }, [fetchBlog]);
-
-
-  const changePost = (id: string) => {
-    console.log(id)
-  }
-
-  const deletePost = async (id: string) => {
-    await axiosApi.delete('/blog/' + id + '.json');
-    await fetchBlog().catch(console.error);
-  };
+    if (location.pathname === '/' || location.pathname === '/posts') {
+      fetchBlog().catch(console.error);
+    }
+  }, [fetchBlog, location]);
 
   return (
-    <div className='container'>
-      <Blogs
-        posts={blog}
-        readMore={changePost}
-        deletePost={deletePost}
-      />
-    </div>
+    <>
+      {loading ? <Spinner/> : (
+        <Blogs posts={blogs}/>
+      )}
+    </>
   );
 };
 

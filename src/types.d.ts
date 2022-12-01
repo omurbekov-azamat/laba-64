@@ -4,3 +4,9 @@ export interface GotBlog {
   date: string;
   id: string;
 }
+
+export type GotBlogApi = Omit<GotBlog, 'id'>
+
+export interface GotBlogList {
+  [id: string]: GotBlog;
+}

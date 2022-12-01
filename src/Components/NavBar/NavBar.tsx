@@ -9,12 +9,12 @@ const NavBar = () => {
         <div className="ms-5">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <NavLink to='/home' className="nav-link">
+              <NavLink to='/posts' className="nav-link">
                 Home
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to='/add' className="nav-link">
+              <NavLink to='/new-post' className="nav-link">
                 Add
               </NavLink>
             </li>
