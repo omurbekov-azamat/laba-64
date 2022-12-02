@@ -1,8 +1,8 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import axiosApi from "../../axiosApi";
 import {useLocation} from "react-router-dom";
-import Blogs from "../../Components/Blog/Blogs";
-import Spinner from "../../Components/Spinner/Spinner";
+import Blogs from "../../components/Blog/Blogs";
+import Spinner from "../../components/Spinner/Spinner";
 import {GotBlog, GotBlogList} from "../../types";
 
 const Home = () => {
@@ -18,12 +18,12 @@ const Home = () => {
         const blogs = Object.keys(blogsResponse.data).map(key => {
           const blog = blogsResponse.data[key];
           blog.id = key;
-          return blog
+          return blog;
         });
         setBlogs(blogs.reverse());
       }
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }, []);
 

@@ -23,7 +23,7 @@ const FormBlog: React.FC<Props> = ({existingBlog, onSubmit}) => {
   };
 
   const onFormSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     onSubmit(blog);
   };
 
@@ -54,7 +54,7 @@ const FormBlog: React.FC<Props> = ({existingBlog, onSubmit}) => {
             required
           />
         </div>
-        <button className='btn btn-primary'>{existingBlog ? 'Edit' : 'Create'}</button>
+        <button className='btn btn-info'>{existingBlog ? 'Edit' : 'Create'}</button>
       </div>
     </form>
   );

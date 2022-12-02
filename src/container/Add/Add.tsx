@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import axiosApi from "../../axiosApi";
 import {useNavigate} from "react-router-dom";
-import FormBlog from "../../Components/FormBlog/FormBlog";
-import Spinner from "../../Components/Spinner/Spinner";
+import FormBlog from "../../components/FormBlog/FormBlog";
+import Spinner from "../../components/Spinner/Spinner";
 import {GotBlogApi} from "../../types";
 
 const Add = () => {

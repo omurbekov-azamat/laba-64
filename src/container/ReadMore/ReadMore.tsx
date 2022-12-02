@@ -1,9 +1,9 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import AxiosApi from "../../axiosApi";
+import Spinner from "../../components/Spinner/Spinner";
+import ReadBlog from "../../components/ReadBlog/ReadBlog";
 import {GotBlogApi} from "../../types";
-import Spinner from "../../Components/Spinner/Spinner";
-import ReadBlog from "../../Components/ReadBlog/ReadBlog";
 
 const ReadMore = () => {
   const {id} = useParams();
@@ -17,7 +17,7 @@ const ReadMore = () => {
       const blogResponse = await AxiosApi.get<GotBlogApi>('/blog/' + id + '.json');
       setBlog(blogResponse.data);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }, [id]);
 
@@ -30,6 +30,7 @@ const ReadMore = () => {
       setLoading(true)
       await AxiosApi.delete('/blog/' + id + '.json');
     } finally {
+      setLoading(false);
       navigate('/posts');
     }
   };
