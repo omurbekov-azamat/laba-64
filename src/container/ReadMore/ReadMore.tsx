@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react';
+import axiosApi from "../../axiosApi";
 import {useNavigate, useParams} from "react-router-dom";
-import AxiosApi from "../../axiosApi";
 import Spinner from "../../components/Spinner/Spinner";
 import ReadBlog from "../../components/ReadBlog/ReadBlog";
 import {GotBlogApi} from "../../types";
@@ -14,7 +14,7 @@ const ReadMore = () => {
   const fetchOneBlog = useCallback(async () => {
     try {
       setLoading(true);
-      const blogResponse = await AxiosApi.get<GotBlogApi>('/blog/' + id + '.json');
+      const blogResponse = await axiosApi.get<GotBlogApi>('/blog/' + id + '.json');
       setBlog(blogResponse.data);
     } finally {
       setLoading(false);
@@ -28,7 +28,7 @@ const ReadMore = () => {
   const deletePost = async () => {
     try {
       setLoading(true)
-      await AxiosApi.delete('/blog/' + id + '.json');
+      await axiosApi.delete('/blog/' + id + '.json');
     } finally {
       setLoading(false);
       navigate('/posts');

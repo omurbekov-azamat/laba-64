@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import AxiosApi from "../../axiosApi";
+import axiosApi from "../../axiosApi";
 import {useNavigate, useParams} from "react-router-dom";
 import FormBlog from "../../components/FormBlog/FormBlog";
 import Spinner from "../../components/Spinner/Spinner";
@@ -14,7 +14,7 @@ const EditBlog = () => {
   const fetchEditBlog = useCallback(async () => {
     try {
       setLoading(true);
-      const blogResponse = await AxiosApi.get<GotBlogApi>('/blog/' + id + '.json');
+      const blogResponse = await axiosApi.get<GotBlogApi>('/blog/' + id + '.json');
       setBlog(blogResponse.data);
     } finally {
       setLoading(false);
@@ -25,11 +25,10 @@ const EditBlog = () => {
     fetchEditBlog().catch(console.error);
   }, [fetchEditBlog]);
 
-
   const editBlog = async (blog: GotBlogApi) => {
     try {
       setLoading(true);
-      await AxiosApi.put('/blog/' + id + '.json', blog);
+      await axiosApi.put('/blog/' + id + '.json', blog);
     } finally {
       setLoading(false);
       navigate('/');
